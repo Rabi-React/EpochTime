@@ -27,6 +27,7 @@
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     color: rebeccapurple;
+    margin-top: 20px;
 }
 
 .rightPanel{
@@ -36,4 +37,15 @@
     color: red;
     height: 100%;
     background-color: bisque;
+    width: 50vw;
+    border-left: 2px solid brown;
+    padding: 25px 0 0 15px;
+}
+
+.leftPanel{
+    background-color: bisque;
+    height: 100%;
+    width: 50vw;
+    border-right: 2px solid brown;
+    padding: 25px 0 0 15px;
 }

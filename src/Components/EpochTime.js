@@ -13,15 +13,13 @@ export default function EpochTime(){
         },[]);
 
     useEffect(()=>{
-        setIsLoading(true);
-        const interval = setInterval(()=> axios.get('https://worldtimeapi.org/api/timezone/Etc/UTC').
-                                        then(res => {setEpochTime(res.data.unixtime)}), 30000);
+        
+        const interval = setInterval(async ()=> {setIsLoading(true);await axios.get('https://worldtimeapi.org/api/timezone/Etc/UTC').
+                                        then(res => {setIsLoading(false);setEpochTime(res.data.unixtime)})}, 30000);
                                        
         return ()=> {clearInterval(interval)}
         
      },[epochTime]);
-
-    useEffect(()=> setIsLoading(false),[epochTime]);
 
     useEffect(()=>{
         const interval = setInterval(()=>{
@@ -39,14 +37,14 @@ export default function EpochTime(){
         return ()=> {clearInterval(interval)}
     },[stopWatch]);
 
-    return <div>{isLoading ? <div className='loading'>Loading...</div> : 
+    return <>{isLoading ? <div className='loading'>Loading...</div> : 
     <div className='mainDiv'>
         <div className='leftPanel'>
         <div className='timeDisplay'>Most Recently Fetched Time:{epochTime} ms</div>
         <div className='timeDifference'>Time Difference: {stopWatch}</div>
         </div>
-    <div className='rightPanel'>Right Panel</div>
+    <div className='rightPanel'>Prometheus Metrics</div>
     </div>
-    }</div>
+    }</>
     
 }
